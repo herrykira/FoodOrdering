@@ -16,12 +16,12 @@ android {
     }
     flavorDimensions "tier"
     productFlavors {
-        free {
+        restaurant {
             applicationIdSuffix ".restaurant"
             versionNameSuffix "-restaurant"
             dimension "tier"
         }
-        paid {
+        customer {
             applicationIdSuffix ".customer"
             versionNameSuffix "-customer"
             dimension "tier"
