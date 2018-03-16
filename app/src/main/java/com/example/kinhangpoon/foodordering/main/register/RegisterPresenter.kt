@@ -8,5 +8,5 @@ import android.view.View
 interface RegisterPresenter {
     fun createView(view: View?)
 
-    fun sendRegister(name:String?,password:String?,userEmail:String?,userAddress:String?,userPhone:String?)
+    fun sendRegister(name:String,password:String,userEmail:String,userAddress:String,userPhone:String)
 }

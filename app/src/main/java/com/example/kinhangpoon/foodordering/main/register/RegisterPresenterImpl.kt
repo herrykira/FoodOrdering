@@ -15,8 +15,8 @@ class RegisterPresenterImpl ( registerFragment: RegisterFragment) : RegisterPres
         idataManager = DataManager(registerFragment.context)
 
     }
-    override fun sendRegister(name: String?, password: String?, userEmail: String?, userAddress: String?, userPhone: String?) {
-
+    override fun sendRegister(name: String, password: String, userEmail: String, userAddress: String, userPhone: String) {
+        idataManager.requestRegister(name,password,userEmail,userAddress,userPhone)
     }
 
     override fun createView(view: View?) {
