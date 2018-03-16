@@ -1,6 +1,7 @@
 package com.example.kinhangpoon.foodordering.model
 
 import android.content.Context
+import android.util.Log
 import com.example.kinhangpoon.foodordering.network.RetrofitInstance
 import com.example.kinhangpoon.foodordering.network.UserService
 import retrofit2.Call
@@ -15,13 +16,15 @@ class DataManager(context: Context?): IDataManager {
     override fun requestRegister(name: String, password: String, userEmail: String, userAddress: String, userPhone: String) {
         val userService = RetrofitInstance.retrofitInstance!!.create(UserService::class.java)
         val call = userService!!.registerUser(name,userEmail,userPhone,password,userAddress)
-        call.enqueue(object : Callback<String>{
-            override fun onResponse(call: Call<String>?, response: Response<String>?) {
-
+        Log.i("mylog", "call url: " + call.request().url().toString())
+        call.enqueue(object : Callback<Any>{
+            override fun onResponse(call: Call<Any>?, response: Response<Any>?) {
+                //iRegistrationFragment.showToastMessage(response.body().toString())
+                Log.i("mylog", response!!.body().toString().trim())
             }
 
-            override fun onFailure(call: Call<String>?, t: Throwable?) {
-
+            override fun onFailure(call: Call<Any>?, t: Throwable?) {
+                Log.e("mylog", t!!.message)
             }
         })
     }
