@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.example.kinhangpoon.foodordering.R
+import com.example.kinhangpoon.foodordering.main.register.RegisterFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -52,8 +53,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
             R.id.action_settings -> return true
-            else -> return super.onOptionsItemSelected(item)
+            R.id.login -> supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, RegisterFragment())
+                    .addToBackStack(null).commit();
         }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

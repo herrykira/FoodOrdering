@@ -12,10 +12,18 @@ import retrofit2.Response
 /**
  * Created by KinhangPoon on 15/3/2018.
  */
-class DataManager(context: Context?): IDataManager {
+class DataManager(context: Context): IDataManager {
+    internal var context:Context
+    init {
+        this.context = context
+    }
+
     override fun requestRegister(name: String, password: String, userEmail: String, userAddress: String, userPhone: String) {
         val userService = RetrofitInstance.retrofitInstance!!.create(UserService::class.java)
         val call = userService!!.registerUser(name,userEmail,userPhone,password,userAddress)
+        call.enqueue(object : Callback<String>{
+            override fun onResponse(call: Call<String>?, response: Response<String>?) {
+                Log.i("Register",response?.body().toString())
         Log.i("mylog", "call url: " + call.request().url().toString())
         call.enqueue(object : Callback<Any>{
             override fun onResponse(call: Call<Any>?, response: Response<Any>?) {
@@ -23,6 +31,8 @@ class DataManager(context: Context?): IDataManager {
                 Log.i("mylog", response!!.body().toString().trim())
             }
 
+            override fun onFailure(call: Call<String>?, t: Throwable?) {
+                Log.i("Register",t.toString())
             override fun onFailure(call: Call<Any>?, t: Throwable?) {
                 Log.e("mylog", t!!.message)
             }

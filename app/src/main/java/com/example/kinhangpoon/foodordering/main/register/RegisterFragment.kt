@@ -49,7 +49,9 @@ class RegisterFragment : Fragment(),RegisterView {
         val userAddress = address?.text.toString()
         val userPhone = phone?.text.toString()
 
-        registerPresenter?.sendRegister(Name,passWord,userEmail,userAddress,userPhone)
+        buttonRegister?.setOnClickListener {
+            registerPresenter?.sendRegister(Name, passWord, userEmail, userAddress, userPhone)
+        }
 
     }
 }
