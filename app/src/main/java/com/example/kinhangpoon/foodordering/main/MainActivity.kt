@@ -4,12 +4,14 @@ import android.app.FragmentManager
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.example.kinhangpoon.foodordering.R
 import com.example.kinhangpoon.foodordering.customer.view.MainscreenFragment
 import com.example.kinhangpoon.foodordering.main.register.RegisterFragment
@@ -21,7 +23,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     //var fragmentManager : FragmentManager = null
 
     override fun sendData(item_index: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val f: Fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+        when (f) {
+            is MainscreenFragment ->
+                when (item_index) {
+                    0 -> Toast.makeText(this, "Menu", Toast.LENGTH_SHORT).show()
+                    1 -> Toast.makeText(this, "Track", Toast.LENGTH_SHORT).show()
+                    2 -> Toast.makeText(this, "Ordering History", Toast.LENGTH_SHORT).show()
+                    3 -> Toast.makeText(this, "Map", Toast.LENGTH_SHORT).show()
+                }
+            else -> Toast.makeText(this, "no such fragment " + item_index, Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

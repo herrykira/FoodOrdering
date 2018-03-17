@@ -24,7 +24,8 @@ class MainscreenFragment: Fragment(), MyAdapter.ItemModifier{
     internal var adapter: MyAdapter? = null
 
     override fun onItemSelected(position: Int) {
-        Log.i("mylog", "item " + position)
+        //Log.i("mylog", "item " + position)
+        sendMessage!!.sendData(position)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
