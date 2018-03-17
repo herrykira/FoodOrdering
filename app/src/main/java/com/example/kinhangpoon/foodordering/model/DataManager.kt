@@ -21,6 +21,7 @@ class DataManager(context: Context): IDataManager {
     override fun requestRegister(name: String, password: String, userEmail: String, userAddress: String, userPhone: String) {
         val userService = RetrofitInstance.retrofitInstance!!.create(UserService::class.java)
         val call = userService!!.registerUser(name,userEmail,userPhone,password,userAddress)
+        Log.i("logUrl",call.request().url().toString())
         call.enqueue(object : Callback<String>{
             override fun onResponse(call: Call<String>?, response: Response<String>?) {
                 Log.i("Register",response?.body().toString())
