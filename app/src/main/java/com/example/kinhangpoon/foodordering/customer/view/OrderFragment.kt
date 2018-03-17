@@ -1,4 +1,4 @@
-package com.example.kinhangpoon.foodordering.customer
+package com.example.kinhangpoon.foodordering.customer.view
 
 /**
  * Created by KinhangPoon on 14/3/2018.

@@ -3,7 +3,7 @@ package com.example.kinhangpoon.foodordering.main.register
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +42,7 @@ class RegisterFragment : Fragment(),RegisterView {
         address = view?.findViewById<EditText>(R.id.editText_address_register) as EditText
         phone = view?.findViewById<EditText>(R.id.editText_phone_register) as EditText
         buttonRegister = view?.findViewById<Button>(R.id.button_register) as Button
+
 
 
         buttonRegister?.setOnClickListener {
