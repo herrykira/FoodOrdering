@@ -43,13 +43,14 @@ class RegisterFragment : Fragment(),RegisterView {
         phone = view?.findViewById<EditText>(R.id.editText_phone_register) as EditText
         buttonRegister = view?.findViewById<Button>(R.id.button_register) as Button
 
-        val Name = username?.text.toString()
-        val passWord = password?.text.toString()
-        val userEmail = email?.text.toString()
-        val userAddress = address?.text.toString()
-        val userPhone = phone?.text.toString()
+
 
         buttonRegister?.setOnClickListener {
+            val Name = username?.text.toString()
+            val passWord = password?.text.toString()
+            val userEmail = email?.text.toString()
+            val userAddress = address?.text.toString()
+            val userPhone = phone?.text.toString()
             registerPresenter?.sendRegister(Name, passWord, userEmail, userAddress, userPhone)
         }
 
