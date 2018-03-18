@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.example.kinhangpoon.foodordering.network.RetrofitInstance
 import com.example.kinhangpoon.foodordering.network.UserService
+import com.example.kinhangpoon.foodordering.utility.AccountDescription
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
@@ -61,7 +62,13 @@ class DataManager(context: Context): IDataManager {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         {response ->
-                            Log.i("mylog", response[0].userName.toString())
+                            //Log.i("mylog", response[0].userName.toString())
+                            AccountDescription.msg = response[0].msg.toString()
+                            AccountDescription.UserName = response[0].userName.toString()
+                            AccountDescription.UserEmail = response[0].userEmail.toString()
+                            AccountDescription.UserAddress = response[0].userAddress.toString()
+                            AccountDescription.UserMobile = response[0].userMobile.toString()
+                            AccountDescription.login = "login"
                         },
                         {error ->
                             Log.i("mylog", error!!.message)
