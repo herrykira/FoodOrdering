@@ -1,6 +1,7 @@
 package com.example.kinhangpoon.foodordering.main
 
 import android.app.FragmentManager
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -19,6 +20,7 @@ import com.example.kinhangpoon.foodordering.utility.SendMessage
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
+
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, SendMessage {
     //var fragmentManager : FragmentManager = null
 
@@ -31,8 +33,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     0 -> Toast.makeText(this, "Menu", Toast.LENGTH_SHORT).show()
                     1 -> Toast.makeText(this, "Track", Toast.LENGTH_SHORT).show()
                     2 -> Toast.makeText(this, "Ordering History", Toast.LENGTH_SHORT).show()
-                    3 -> Toast.makeText(this, "Map", Toast.LENGTH_SHORT).show()
+                    3 -> startActivity( Intent(this@MainActivity, GMapsActivity::class.java))
                 }
+
             else -> Toast.makeText(this, "no such fragment " + item_index, Toast.LENGTH_SHORT).show()
         }
 
