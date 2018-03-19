@@ -43,7 +43,7 @@ class FoodFragment : Fragment() {
 
     internal var foodItem: FoodItem? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //return super.onCreateView(inflater, container, savedInstanceState)
 
         rootView = inflater!!.inflate(R.layout.fragment_food, container, false)

@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="Login" android:id="@+id/login" />
+
     <item
         android:id="@+id/option_go_home"
         android:title="@string/option_go_back"

@@ -30,7 +30,7 @@ class PlacesFragment: Fragment(), MyPlacesAdapter.ItemModifier {
         sendMessage!!.sendData(position)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //return super.onCreateView(inflater, container, savedInstanceState)
 
         rootView = inflater!!.inflate(R.layout.fragment_places, container, false)
