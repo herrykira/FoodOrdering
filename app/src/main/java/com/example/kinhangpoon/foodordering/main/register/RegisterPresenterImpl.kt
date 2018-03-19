@@ -12,7 +12,7 @@ class RegisterPresenterImpl ( registerFragment: RegisterFragment) : RegisterPres
     internal var idataManager:IDataManager
     init {
         registerView = registerFragment
-        idataManager = DataManager(registerFragment.context)
+        idataManager = DataManager(registerFragment.context!!)
 
     }
     override fun sendRegister(name: String, password: String, userEmail: String, userAddress: String, userPhone: String) {

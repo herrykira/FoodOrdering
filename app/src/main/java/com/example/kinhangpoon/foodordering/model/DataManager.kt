@@ -1,9 +1,19 @@
 package com.example.kinhangpoon.foodordering.model
 
 import android.content.Context
+import android.support.v4.app.ActivityCompat.startActivityForResult
+
 import android.util.Log
+import android.view.View
+import com.example.kinhangpoon.foodordering.R
 import com.example.kinhangpoon.foodordering.network.RetrofitInstance
 import com.example.kinhangpoon.foodordering.network.UserService
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.SignInButton
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.firebase.auth.FirebaseAuth
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -13,6 +23,8 @@ import retrofit2.Response
  * Created by KinhangPoon on 15/3/2018.
  */
 class DataManager(context: Context): IDataManager {
+
+
     internal var context:Context
     init {
         this.context = context
@@ -36,4 +48,5 @@ class DataManager(context: Context): IDataManager {
             }
         })
     }
+
 }

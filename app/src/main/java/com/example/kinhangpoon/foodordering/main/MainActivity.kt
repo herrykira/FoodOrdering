@@ -17,13 +17,14 @@ import com.example.kinhangpoon.foodordering.R
 import com.example.kinhangpoon.foodordering.customer.view.MainscreenFragment
 import com.example.kinhangpoon.foodordering.main.register.RegisterFragment
 import com.example.kinhangpoon.foodordering.utility.SendMessage
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, SendMessage {
     //var fragmentManager : FragmentManager = null
-
     override fun sendData(item_index: Int) {
         //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         val f: Fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
@@ -50,7 +51,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }*/
-
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         addFrontpageFragment()
     }
+
 
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
@@ -72,6 +73,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
+//        var userRegistered:Boolean = false
+//        if(LoginActivity.mAuth==null){
+//            userRegistered = false;
+//        }
+//        else{
+//            userRegistered = true;
+//        }
+//        menu.findItem(R.id.register).setVisible(!userRegistered)
+//        menu.findItem(R.id.login).setVisible(!userRegistered)
+//        menu.findItem(R.id.logout).setVisible(userRegistered)
         return true
     }
 
@@ -80,12 +91,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
-            R.id.action_settings -> return true
-            R.id.login -> supportFragmentManager.beginTransaction()
+            R.id.register -> supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, RegisterFragment())
                     .addToBackStack(null).commit();
+            R.id.login ->userlogin();
+            R.id.logout -> revokeAccess();
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun userlogin() {
+        startActivity(Intent(this@MainActivity,LoginActivity::class.java))
+    }
+
+    private fun revokeAccess() {
+        // Firebase sign out
+        LoginActivity.mAuth?.signOut()
+        LoginActivity.mGoogleSignInClient?.revokeAccess()?.addOnCompleteListener(this) {  }
+        finish();
+        startActivity(getIntent());
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "899775963015",
+    "firebase_url": "https://foodordering2-ec902.firebaseio.com",
+    "project_id": "foodordering2-ec902",
+    "storage_bucket": "foodordering2-ec902.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899775963015:android:2142237e1c4c0e5c",
+        "android_client_info": {
+          "package_name": "com.example.kinhangpoon.foodordering.customer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "899775963015-88ailfohrvi0itjtusqj2mv3f8bqieij.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kinhangpoon.foodordering.customer",
+            "certificate_hash": "b66d3d129f5fe3d5b14d917f16d088332db163c6"
+          }
+        },
+        {
+          "client_id": "899775963015-ke2tb8r1khnu3ci7tbfpqp3rm3lkbuoo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAe3vdMsOsBExChLIDWogRdyH4zMqGyw8w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "899775963015-ke2tb8r1khnu3ci7tbfpqp3rm3lkbuoo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899775963015:android:ee205eecd09fb74c",
+        "android_client_info": {
+          "package_name": "com.example.kinhangpoon.foodordering.restaurant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "899775963015-s0ull3bhun520fb12v14antog4jil53s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kinhangpoon.foodordering.restaurant",
+            "certificate_hash": "b66d3d129f5fe3d5b14d917f16d088332db163c6"
+          }
+        },
+        {
+          "client_id": "899775963015-ke2tb8r1khnu3ci7tbfpqp3rm3lkbuoo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAe3vdMsOsBExChLIDWogRdyH4zMqGyw8w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "899775963015-ke2tb8r1khnu3ci7tbfpqp3rm3lkbuoo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
