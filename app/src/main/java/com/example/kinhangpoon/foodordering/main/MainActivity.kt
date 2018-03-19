@@ -9,25 +9,30 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.example.kinhangpoon.foodordering.R
+import com.example.kinhangpoon.foodordering.customer.view.FoodFragment
 import com.example.kinhangpoon.foodordering.customer.view.MainscreenFragment
 import com.example.kinhangpoon.foodordering.customer.view.MenuFragment
 import com.example.kinhangpoon.foodordering.customer.view.PlacesFragment
 import com.example.kinhangpoon.foodordering.main.register.RegisterFragment
+import com.example.kinhangpoon.foodordering.utility.FoodDescription
 import com.example.kinhangpoon.foodordering.utility.SendMessage
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, SendMessage {
+
     //var fragmentManager : FragmentManager = null
+    internal var myToolbar: Toolbar? = null
 
     override fun sendData(item_index: Int) {
-        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
         val f: Fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         when (f) {
             is MainscreenFragment ->
@@ -44,42 +49,54 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     }
 
                 }
-            is MenuFragment ->
-                Toast.makeText(this, "Food #" + item_index, Toast.LENGTH_SHORT).show()
+            is MenuFragment -> {
+                //Toast.makeText(this, "Food #" + item_index, Toast.LENGTH_SHORT).show()
+                addFoodFragment(item_index)
+            }
+
+
             is PlacesFragment ->
                     //Toast.makeText(this, "Place #" + item_index, Toast.LENGTH_SHORT).show()
                 when (item_index) {
                     0 -> {
                         Toast.makeText(this, "High Court of Karnataka", Toast.LENGTH_SHORT).show()
                         addMenuFragment("banglore")
+                        FoodDescription.currentCity = "banglore"
                     }
                     1 -> {
                         Toast.makeText(this, "Bangalore Palace", Toast.LENGTH_SHORT).show()
                         addMenuFragment("banglore")
+                        FoodDescription.currentCity = "banglore"
                     }
                     2 -> {
                         Toast.makeText(this, "St Francis Xavier", Toast.LENGTH_SHORT).show()
                         addMenuFragment("banglore")
+                        FoodDescription.currentCity = "banglore"
                     }
                     3 -> {
                         Toast.makeText(this, "Vikas Soudha", Toast.LENGTH_SHORT).show()
                         addMenuFragment("banglore")
+                        FoodDescription.currentCity = "banglore"
                     }
                     4 -> {
                         Toast.makeText(this, "Lotus Tempel", Toast.LENGTH_SHORT).show()
                         addMenuFragment("delhi")
+                        FoodDescription.currentCity = "delhi"
                     }
                     5 -> {
                         Toast.makeText(this, "Akshardham", Toast.LENGTH_SHORT).show()
                         addMenuFragment("delhi")
+                        FoodDescription.currentCity = "delhi"
                     }
                     6 -> {
                         Toast.makeText(this, "India Gate", Toast.LENGTH_SHORT).show()
                         addMenuFragment("delhi")
+                        FoodDescription.currentCity = "delhi"
                     }
                     7 -> {
                         Toast.makeText(this, "Tajmahal", Toast.LENGTH_SHORT).show()
                         addMenuFragment("delhi")
+                        FoodDescription.currentCity = "delhi"
                     }
                 }
             else -> Toast.makeText(this, "no such fragment " + item_index, Toast.LENGTH_SHORT).show()
@@ -90,8 +107,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
-
+        //setSupportActionBar(toolbar)
+        myToolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(myToolbar)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        setSupportActionBar(myToolbar)
+        //getSupportActionBar()!!.setTitle("Home")
         /*fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
@@ -130,6 +151,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.login -> supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, RegisterFragment())
                     .addToBackStack(null).commit();
+            R.id.option_go_home -> {
+                Toast.makeText(this, "main screen", Toast.LENGTH_SHORT).show()
+                supportFragmentManager.popBackStack(0, 0)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -205,5 +230,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 .replace(R.id.fragment_container, menuFragment)
                 .addToBackStack(null)
                 .commit()
+    }
+
+    private fun addFoodFragment(item_index: Int) {
+        val foodFragment: FoodFragment = FoodFragment()
+        foodFragment.setSendMessage(this@MainActivity)
+        foodFragment.setCity(FoodDescription.currentCity!!)
+        foodFragment.setIndex(item_index)
+        Log.i("maylog", "inflate food description")
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, foodFragment)
+                .addToBackStack(null)
+                .commit()
+    }
+
+    override fun setTitle(page_title: String) {
+        getSupportActionBar()!!.setTitle(page_title)
     }
 }

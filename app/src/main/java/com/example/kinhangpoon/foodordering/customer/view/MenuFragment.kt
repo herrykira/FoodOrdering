@@ -59,6 +59,10 @@ class MenuFragment() : Fragment(), MyFoodAdapter.ItemModifier{
         }
 
     }
+    override fun onResume() {
+        super.onResume()
+        sendMessage!!.setTitle("Menu")
+    }
 
     fun setSendMessage(sendMessage: SendMessage) {
         this.sendMessage = sendMessage

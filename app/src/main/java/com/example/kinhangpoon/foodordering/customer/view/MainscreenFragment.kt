@@ -53,4 +53,9 @@ class MainscreenFragment: Fragment(), MyAdapter.ItemModifier{
     fun setSendMessage(sendMessage: SendMessage) {
         this.sendMessage = sendMessage
     }
+
+    override fun onResume() {
+        super.onResume()
+        sendMessage!!.setTitle("Home")
+    }
 }

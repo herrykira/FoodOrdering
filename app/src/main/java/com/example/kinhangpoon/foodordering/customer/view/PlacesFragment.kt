@@ -55,4 +55,8 @@ class PlacesFragment: Fragment(), MyPlacesAdapter.ItemModifier {
     fun setSendMessage(sendMessage: SendMessage) {
         this.sendMessage = sendMessage
     }
+    override fun onResume() {
+        super.onResume()
+        sendMessage!!.setTitle("Get Your Local Menu")
+    }
 }

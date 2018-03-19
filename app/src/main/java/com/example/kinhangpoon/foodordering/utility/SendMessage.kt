@@ -5,6 +5,7 @@ package com.example.kinhangpoon.foodordering.utility
  */
 interface SendMessage {
     fun sendData(item_index: Int)
+    fun setTitle(page_title: String)
         //fun sendCommand(command: String)
         //fun showMessage(message: String)
         //fun getClientTokenFromAppServer()

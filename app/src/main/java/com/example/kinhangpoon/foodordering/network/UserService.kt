@@ -31,4 +31,7 @@ UserService {
 
     @GET("fos_food_loc.php")
     fun foodUser(@Query("city") city:String): Observable<FoodResponse>
+
+
+
 }

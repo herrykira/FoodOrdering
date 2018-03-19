@@ -8,4 +8,5 @@ import com.example.kinhangpoon.foodordering.model.FoodItem
 object FoodDescription {
     var foodListDelhi: List<FoodItem>? = null
     var foodListBanglore: List<FoodItem>? = null
+    var currentCity: String? = null
 }
