@@ -2,6 +2,7 @@ package com.example.kinhangpoon.foodordering.network
 
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 
@@ -19,6 +20,7 @@ object RetrofitInstance {
     val retrofitInstance:Retrofit?
     get(){
         retrofit = retrofit2.Retrofit.Builder()
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .baseUrl(BASE_URL).build()
         return retrofit

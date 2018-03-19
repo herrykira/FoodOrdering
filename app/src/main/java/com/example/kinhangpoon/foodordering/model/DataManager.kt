@@ -1,19 +1,14 @@
 package com.example.kinhangpoon.foodordering.model
 
 import android.content.Context
-import android.support.v4.app.ActivityCompat.startActivityForResult
-
 import android.util.Log
-import android.view.View
-import com.example.kinhangpoon.foodordering.R
 import com.example.kinhangpoon.foodordering.network.RetrofitInstance
 import com.example.kinhangpoon.foodordering.network.UserService
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.SignInButton
-import com.google.android.gms.common.api.GoogleApiClient
-import com.google.firebase.auth.FirebaseAuth
+import com.example.kinhangpoon.foodordering.utility.AccountDescription
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,9 +28,9 @@ class DataManager(context: Context): IDataManager {
     override fun requestRegister(name: String, password: String, userEmail: String, userAddress: String, userPhone: String) {
         val userService = RetrofitInstance.retrofitInstance!!.create(UserService::class.java)
         val call = userService!!.registerUser(name,userEmail,userPhone,password,userAddress)
-
-        Log.i("mylog", "call url: " + call.request().url().toString())
-        call.enqueue(object : Callback<Any>{
+        Log.i("mylog", "call login")
+        //Log.i("mylog", "call url: " + call.request().url().toString())
+        /*call.enqueue(object : Callback<Any>{
             override fun onResponse(call: Call<Any>?, response: Response<Any>?) {
                 //iRegistrationFragment.showToastMessage(response.body().toString())
                 //Log.i("mylog", "got response")
@@ -46,7 +41,39 @@ class DataManager(context: Context): IDataManager {
             override fun onFailure(call: Call<Any>?, t: Throwable?) {
                 Log.i("mylog", t!!.message)
             }
-        })
+        })*/
+        call.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {response  ->
+                            Log.i("mylog", response.toString())
+                        },
+                        {error ->
+                            Log.i("mylog", error!!.message)
+                        }
+                )
     }
 
+    override fun requestLogin(user_phone: String, user_password: String) {
+        val userService = RetrofitInstance.retrofitInstance!!.create(UserService::class.java)
+        val call = userService!!.loginUser(user_phone, user_password)
+        Log.i("mylog", "call login")
+        call.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {response ->
+                            //Log.i("mylog", response[0].userName.toString())
+                            AccountDescription.msg = response[0].msg.toString()
+                            AccountDescription.UserName = response[0].userName.toString()
+                            AccountDescription.UserEmail = response[0].userEmail.toString()
+                            AccountDescription.UserAddress = response[0].userAddress.toString()
+                            AccountDescription.UserMobile = response[0].userMobile.toString()
+                            AccountDescription.login = "login"
+                        },
+                        {error ->
+                            Log.i("mylog", error!!.message)
+                        }
+                )
+
+    }
 }
