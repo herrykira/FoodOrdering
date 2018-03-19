@@ -1,6 +1,7 @@
 package com.example.kinhangpoon.foodordering.network
 
 
+import com.example.kinhangpoon.foodordering.model.FoodResponse
 import com.example.kinhangpoon.foodordering.model.LoginResponse
 import io.reactivex.Observable
 import retrofit2.Call
@@ -27,4 +28,7 @@ UserService {
     @GET("fos_login.php")
     fun loginUser(@Query("user_phone") user_phone:String,
                   @Query("user_password") user_password:String): Observable<Array<LoginResponse>>
+
+    @GET("fos_food_loc.php")
+    fun foodUser(@Query("city") city:String): Observable<FoodResponse>
 }

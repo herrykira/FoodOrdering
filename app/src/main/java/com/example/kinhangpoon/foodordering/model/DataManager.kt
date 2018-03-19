@@ -5,6 +5,7 @@ import android.util.Log
 import com.example.kinhangpoon.foodordering.network.RetrofitInstance
 import com.example.kinhangpoon.foodordering.network.UserService
 import com.example.kinhangpoon.foodordering.utility.AccountDescription
+import com.example.kinhangpoon.foodordering.utility.FoodDescription
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
@@ -18,6 +19,7 @@ import retrofit2.Response
  * Created by KinhangPoon on 15/3/2018.
  */
 class DataManager(context: Context): IDataManager {
+
 
 
     internal var context:Context
@@ -74,6 +76,26 @@ class DataManager(context: Context): IDataManager {
                             Log.i("mylog", error!!.message)
                         }
                 )
+    }
 
+    override fun requestFood(city: String) {
+        val userService = RetrofitInstance.retrofitInstance!!.create(UserService::class.java)
+        val call = userService!!.foodUser(city)
+        Log.i("mylog", "call food")
+        call.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {response ->
+                            Log.i("mylog", response.food[0].foodName.toString())
+                            if (city == "delhi") {
+                                FoodDescription.foodListDelhi = response.food
+                            } else if (city == "banglore") {
+                                FoodDescription.foodListBanglore = response.food
+                            }
+                        },
+                        {error ->
+                            Log.i("mylog", error!!.message)
+                        }
+                )
     }
 }

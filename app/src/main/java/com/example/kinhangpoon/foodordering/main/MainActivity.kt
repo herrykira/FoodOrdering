@@ -15,6 +15,8 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.example.kinhangpoon.foodordering.R
 import com.example.kinhangpoon.foodordering.customer.view.MainscreenFragment
+import com.example.kinhangpoon.foodordering.customer.view.MenuFragment
+import com.example.kinhangpoon.foodordering.customer.view.PlacesFragment
 import com.example.kinhangpoon.foodordering.main.register.RegisterFragment
 import com.example.kinhangpoon.foodordering.utility.SendMessage
 import kotlinx.android.synthetic.main.activity_main.*
@@ -30,12 +32,56 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (f) {
             is MainscreenFragment ->
                 when (item_index) {
-                    0 -> Toast.makeText(this, "Menu", Toast.LENGTH_SHORT).show()
+                    0 -> {
+                        Toast.makeText(this, "Menu", Toast.LENGTH_SHORT).show()
+                        addPlacesFragment()
+                    }
                     1 -> Toast.makeText(this, "Track", Toast.LENGTH_SHORT).show()
                     2 -> Toast.makeText(this, "Ordering History", Toast.LENGTH_SHORT).show()
-                    3 -> startActivity( Intent(this@MainActivity, GMapsActivity::class.java))
-                }
+                    3 -> {
+                        Toast.makeText(this, "Map", Toast.LENGTH_SHORT).show()
+                        startActivity( Intent(this@MainActivity, GMapsActivity::class.java))
+                    }
 
+                }
+            is MenuFragment ->
+                Toast.makeText(this, "Food #" + item_index, Toast.LENGTH_SHORT).show()
+            is PlacesFragment ->
+                    //Toast.makeText(this, "Place #" + item_index, Toast.LENGTH_SHORT).show()
+                when (item_index) {
+                    0 -> {
+                        Toast.makeText(this, "High Court of Karnataka", Toast.LENGTH_SHORT).show()
+                        addMenuFragment("banglore")
+                    }
+                    1 -> {
+                        Toast.makeText(this, "Bangalore Palace", Toast.LENGTH_SHORT).show()
+                        addMenuFragment("banglore")
+                    }
+                    2 -> {
+                        Toast.makeText(this, "St Francis Xavier", Toast.LENGTH_SHORT).show()
+                        addMenuFragment("banglore")
+                    }
+                    3 -> {
+                        Toast.makeText(this, "Vikas Soudha", Toast.LENGTH_SHORT).show()
+                        addMenuFragment("banglore")
+                    }
+                    4 -> {
+                        Toast.makeText(this, "Lotus Tempel", Toast.LENGTH_SHORT).show()
+                        addMenuFragment("delhi")
+                    }
+                    5 -> {
+                        Toast.makeText(this, "Akshardham", Toast.LENGTH_SHORT).show()
+                        addMenuFragment("delhi")
+                    }
+                    6 -> {
+                        Toast.makeText(this, "India Gate", Toast.LENGTH_SHORT).show()
+                        addMenuFragment("delhi")
+                    }
+                    7 -> {
+                        Toast.makeText(this, "Tajmahal", Toast.LENGTH_SHORT).show()
+                        addMenuFragment("delhi")
+                    }
+                }
             else -> Toast.makeText(this, "no such fragment " + item_index, Toast.LENGTH_SHORT).show()
         }
 
@@ -135,5 +181,29 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //fragmentTransaction.replace(R.id.fragmentContainer, frontpageFragment)//in CountriesFragment import android.support.v4.app.Fragment;
         //fragmentTransaction.commit()
         //Log.i("mylog", "add list");
+    }
+
+    private fun addPlacesFragment() {
+        val placesFragment: PlacesFragment = PlacesFragment()
+        placesFragment.setSendMessage(this@MainActivity)
+
+        Log.i("maylog", "inflate places")
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, placesFragment)
+                .addToBackStack(null)
+                .commit()
+    }
+
+    private fun addMenuFragment(city: String) {
+        val menuFragment: MenuFragment = MenuFragment()
+        menuFragment.setSendMessage(this@MainActivity)
+        menuFragment.setCity(city)
+        Log.i("maylog", "inflate menu")
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, menuFragment)
+                .addToBackStack(null)
+                .commit()
     }
 }

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import com.example.kinhangpoon.foodordering.main.presenter.FoodPresenter
 import com.example.kinhangpoon.foodordering.main.presenter.LoginPresenter
 import com.example.kinhangpoon.foodordering.main.register.RegisterPresenter
 import com.example.kinhangpoon.foodordering.main.register.RegisterPresenterImpl
@@ -13,6 +14,7 @@ import com.example.kinhangpoon.foodordering.main.register.RegisterPresenterImpl
  */
 class SplashActivity : AppCompatActivity() {
     private var loginPresenter: LoginPresenter?=null
+    private var foodPresenter: FoodPresenter?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +22,10 @@ class SplashActivity : AppCompatActivity() {
         //Log.i("mylog", "splash call login")
         loginPresenter = LoginPresenter(this)
         loginPresenter?.sendLogin("5555555556", "1234")
+
+        foodPresenter = FoodPresenter(this)
+        foodPresenter?.sendFood("delhi")
+        foodPresenter?.sendFood("banglore")
 
         val launcher = Thread(SplashScreenLauncher())
         launcher.start()
