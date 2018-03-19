@@ -28,7 +28,7 @@ class MainscreenFragment: Fragment(), MyAdapter.ItemModifier{
         sendMessage!!.sendData(position)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //return super.onCreateView(inflater, container, savedInstanceState)
 
         rootView = inflater!!.inflate(R.layout.fragment_mainscreen, container, false)
@@ -37,6 +37,8 @@ class MainscreenFragment: Fragment(), MyAdapter.ItemModifier{
 
         return rootView
     }
+
+
 
     fun initMainscreen() {
         context = rootView!!.context

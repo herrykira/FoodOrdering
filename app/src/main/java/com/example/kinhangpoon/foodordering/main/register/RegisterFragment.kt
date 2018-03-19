@@ -30,7 +30,7 @@ class RegisterFragment : Fragment(),RegisterView {
         registerPresenter = RegisterPresenterImpl(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view:View? = inflater?.inflate(R.layout.register_fragment,container,false)
         registerPresenter?.createView(view);
         return view
