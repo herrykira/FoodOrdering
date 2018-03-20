@@ -1,4 +1,5 @@
 package com.example.kinhangpoon.foodordering.main
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -12,6 +13,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -21,6 +23,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.kinhangpoon.foodordering.R
 import com.example.kinhangpoon.foodordering.main.register.RegisterFragment
+import com.example.kinhangpoon.foodordering.utility.FoodDescription
 
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -70,6 +73,8 @@ class GMapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private var mLikelyPlaceAttributions: Array<String?>? = null
     private var mLikelyPlaceLatLngs: Array<LatLng?>? = null
 
+    //internal var myToolbar: Toolbar? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -98,6 +103,11 @@ class GMapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        //myToolbar = findViewById(R.id.toolbar)
+//        setSupportActionBar(myToolbar)
+        //supportActionBar!!.setDisplayShowTitleEnabled(false)
+//        setSupportActionBar(myToolbar)
+        //getSupportActionBar()!!.setTitle("Home")
     }
 
     /**
@@ -159,6 +169,7 @@ class GMapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             val editor = sharedPreferences?.edit()
                             editor?.putString("address",addresses.get(0).getAddressLine(0))
                             editor?.commit()
+                            FoodDescription.address = addresses.get(0).getAddressLine(0)
                             Log.i("address_after",getSharedPreferences("myinfo",Context.MODE_PRIVATE).getString("address",""))
                             // Add a marker for the selected place, with an info window
                             // showing information about that place.
@@ -304,6 +315,7 @@ class GMapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * Prompts the user to select the current place from a list of likely places, and shows the
      * current place on the map - provided the user has granted location permission.
      */
+    @SuppressLint("MissingPermission")
     private fun showCurrentPlace() {
         if (mMap == null) {
             return

@@ -94,7 +94,7 @@ class FoodFragment : Fragment() {
             var order_name = foodItem!!.foodName
             var order_price = Integer.parseInt(foodItem!!.foodPrice)
             var total_order: String? = null
-            var order_delivery_add: String = "noida"
+            var order_delivery_add: String = if (FoodDescription.address != null) FoodDescription.address!! else "noida"
 
             //order_date = Date().toString()
             //Log.i("mylog", "order time " + order_date)

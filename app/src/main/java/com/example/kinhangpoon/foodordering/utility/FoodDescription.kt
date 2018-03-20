@@ -12,4 +12,5 @@ object FoodDescription {
     var recordList: List<OrderDetailItem>? = null
     var currentCity: String? = null
     var confirmNum: String? = null
+    var address: String? = null
 }
