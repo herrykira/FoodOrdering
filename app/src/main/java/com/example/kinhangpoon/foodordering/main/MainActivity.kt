@@ -15,10 +15,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.example.kinhangpoon.foodordering.R
-import com.example.kinhangpoon.foodordering.customer.view.FoodFragment
-import com.example.kinhangpoon.foodordering.customer.view.MainscreenFragment
-import com.example.kinhangpoon.foodordering.customer.view.MenuFragment
-import com.example.kinhangpoon.foodordering.customer.view.PlacesFragment
+import com.example.kinhangpoon.foodordering.customer.view.*
 import com.example.kinhangpoon.foodordering.main.register.RegisterFragment
 import com.example.kinhangpoon.foodordering.utility.FoodDescription
 import com.example.kinhangpoon.foodordering.utility.SendMessage
@@ -38,13 +35,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val f: Fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         when (f) {
             is MainscreenFragment ->
-                when (item_index) {
+                when (item_index%4) {
                     0 -> {
                         Toast.makeText(this, "Menu", Toast.LENGTH_SHORT).show()
                         addPlacesFragment()
                     }
                     1 -> Toast.makeText(this, "Track", Toast.LENGTH_SHORT).show()
-                    2 -> Toast.makeText(this, "Ordering History", Toast.LENGTH_SHORT).show()
+                    2 -> {
+                        Toast.makeText(this, "Ordering History", Toast.LENGTH_SHORT).show()
+                        addRecordFragment()
+                    }
                     3 -> {
                         Toast.makeText(this, "Map", Toast.LENGTH_SHORT).show()
                         startActivity( Intent(this@MainActivity, GMapsActivity::class.java))
@@ -270,6 +270,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 .commit()
     }
 
+    private fun addRecordFragment() {
+        val recordFragment: RecordFragment = RecordFragment()
+        recordFragment.setSendMessage(this@MainActivity)
+        Log.i("maylog", "inflate record description")
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, recordFragment)
+                .addToBackStack(null)
+                .commit()
+    }
     override fun setTitle(page_title: String) {
         getSupportActionBar()!!.setTitle(page_title)
     }

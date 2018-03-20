@@ -13,11 +13,12 @@ import com.example.kinhangpoon.foodordering.R
  */
 class MyAdapter() : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
     internal var titles = arrayOf("Menu", "Track", "Ordering Record", "Map")
-    internal var icons = arrayOf(R.drawable.menu, R.drawable.track, R.drawable.orderhistory, R.drawable.map)
+    internal var icons = arrayOf(R.drawable.menu, R.drawable.takeaway, R.drawable.orderhistory, R.drawable.map)
 
     private var itemModifier: ItemModifier? = null
 
-    override fun getItemCount() = titles.size
+    //override fun getItemCount() = titles.size
+    override fun getItemCount() = Integer.MAX_VALUE
 
     interface ItemModifier {
         fun onItemSelected(position: Int)
@@ -44,8 +45,8 @@ class MyAdapter() : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         //val item = itemsList[position]
-        val title = titles[position]
-        val image = icons[position]
+        val title = titles[position%4]
+        val image = icons[position%4]
 
         holder.titleTextView.text = title
         holder.imageViewMyImage.setImageResource(image)

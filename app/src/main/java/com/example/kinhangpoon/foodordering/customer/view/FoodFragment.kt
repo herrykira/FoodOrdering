@@ -12,10 +12,13 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.kinhangpoon.foodordering.R
+import com.example.kinhangpoon.foodordering.main.presenter.FoodPresenter
 import com.example.kinhangpoon.foodordering.model.FoodItem
+import com.example.kinhangpoon.foodordering.utility.AccountDescription
 import com.example.kinhangpoon.foodordering.utility.FoodDescription
 import com.example.kinhangpoon.foodordering.utility.SendMessage
 import com.squareup.picasso.Picasso
+import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -43,6 +46,8 @@ class FoodFragment : Fragment() {
 
     internal var foodItem: FoodItem? = null
 
+    private var foodPresenter: FoodPresenter?=null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //return super.onCreateView(inflater, container, savedInstanceState)
 
@@ -54,6 +59,8 @@ class FoodFragment : Fragment() {
     }
 
     fun initFood() {
+        TimeZone.setDefault(TimeZone.getTimeZone("America/Chicago"))
+
         context = rootView!!.context
         textViewName = rootView!!.findViewById(R.id.textView2)
         textViewID = rootView!!.findViewById(R.id.textView4)
@@ -80,10 +87,36 @@ class FoodFragment : Fragment() {
             num += 1
             editTextNum!!.setText("" + num,TextView.BufferType.EDITABLE)
         }
-        btnOrder!!.setOnClickListener{
-            Log.i("mylog", "order num " + editTextNum!!.text)
-            order_date = Date().toString()
+        btnOrder!!.setOnClickListener{//hit order btn, order food
+            //Log.i("mylog", "order num " + editTextNum!!.text)
+            var order_quantity = Integer.parseInt(editTextNum!!.text.toString())
+            var order_category = foodItem!!.foodCategory
+            var order_name = foodItem!!.foodName
+            var order_price = Integer.parseInt(foodItem!!.foodPrice)
+            var total_order: String? = null
+            var order_delivery_add: String = "noida"
 
+            //order_date = Date().toString()
+            //Log.i("mylog", "order time " + order_date)
+            /*sendOrder(order_category: String, order_name: String, order_quantity: String,
+                    total_order: String, order_delivery_add: String, order_date: String, user_phone: String)*/
+            if (order_quantity > 0) {
+                val f = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                order_date = f.format(Date())
+                total_order = (Integer.parseInt(order_quantity.toString()) * order_price).toString()
+                Log.i("mylog", "food category " + order_category)
+                Log.i("mylog", "food name " + order_name)
+                Log.i("mylog", "food quantity " + order_quantity)
+                Log.i("mylog", "food total " + total_order)
+                Log.i("mylog", "food add " + order_delivery_add)
+                Log.i("mylog", "food date " + order_date)
+                Log.i("mylog", "food user " + AccountDescription.UserMobile)
+                foodPresenter = FoodPresenter(context!!)
+                foodPresenter!!.sendOrder(order_category,order_name,(order_quantity).toString(),
+                        total_order,order_delivery_add,order_date!!,AccountDescription.UserMobile)
+            } else {
+                Log.i("mylog", "didn't order anything")
+            }
         }
 
         if (city != null && indx != null && city == "banglore") {

@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,10 @@ import com.dant.centersnapreyclerview.SnappingRecyclerView
 import com.example.kinhangpoon.foodordering.R
 import com.example.kinhangpoon.foodordering.utility.MyAdapter
 import com.example.kinhangpoon.foodordering.utility.SendMessage
+import android.support.v7.widget.LinearSnapHelper
+import android.support.v7.widget.SnapHelper
+
+
 
 /**
  * Created by hefen on 3/17/2018.
@@ -20,7 +25,8 @@ class MainscreenFragment: Fragment(), MyAdapter.ItemModifier{
     internal var sendMessage: SendMessage? = null
     internal var rootView: View? = null
     internal var context: Context? = null
-    internal var recyclerViewItems: SnappingRecyclerView? = null
+    //internal var recyclerViewItems: SnappingRecyclerView? = null//start snapping
+    internal var recyclerViewItems: RecyclerView? = null
     internal var adapter: MyAdapter? = null
 
     override fun onItemSelected(position: Int) {
@@ -50,6 +56,11 @@ class MainscreenFragment: Fragment(), MyAdapter.ItemModifier{
         adapter = MyAdapter()
         adapter!!.setItemModifier(this)//??this context
         recyclerViewItems!!.setAdapter(adapter)
+
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(recyclerViewItems)//item in center
+
+        recyclerViewItems!!.getLayoutManager().scrollToPosition(Integer.MAX_VALUE / 2)
     }
 
     fun setSendMessage(sendMessage: SendMessage) {
