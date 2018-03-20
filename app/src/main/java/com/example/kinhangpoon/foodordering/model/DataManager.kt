@@ -128,6 +128,10 @@ class DataManager(context: Context): IDataManager {
                 }
                 .doOnNext { response -> Log.i("mylog", "final confirm " + response.orderDetail[0].orderId)}
                 .flatMap { response ->
+                    return@flatMap userService!!.recordUser(AccountDescription.UserMobile)
+                }
+                .doOnNext { response -> FoodDescription.recordList = response.orderDetail }
+                .flatMap { response ->
                     return@flatMap userService!!.trackUser(FoodDescription.confirmNum!!)
                 }
                 .subscribeOn(Schedulers.io())
