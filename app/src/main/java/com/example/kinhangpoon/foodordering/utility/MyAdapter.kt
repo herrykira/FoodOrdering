@@ -12,7 +12,7 @@ import com.example.kinhangpoon.foodordering.R
  * Created by hefen on 3/17/2018.
  */
 class MyAdapter() : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
-    internal var titles = arrayOf("Menu", "Track", "Ordering Record", "Map")
+    internal var titles = arrayOf("Menu", "Track", "Order History", "Location")
     internal var icons = arrayOf(R.drawable.menu, R.drawable.takeaway, R.drawable.orderhistory, R.drawable.map)
 
     private var itemModifier: ItemModifier? = null

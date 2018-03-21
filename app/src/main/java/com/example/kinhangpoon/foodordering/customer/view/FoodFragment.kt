@@ -7,10 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import com.example.kinhangpoon.foodordering.R
 import com.example.kinhangpoon.foodordering.main.presenter.FoodPresenter
 import com.example.kinhangpoon.foodordering.model.FoodItem
@@ -117,6 +114,7 @@ class FoodFragment : Fragment() {
 
             } else {
                 Log.i("mylog", "didn't order anything")
+                Toast.makeText(context, "Please select quantity", Toast.LENGTH_SHORT).show()
             }
         }
 

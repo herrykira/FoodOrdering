@@ -51,6 +51,6 @@ class RecordFragment: Fragment() {
     }
     override fun onResume() {
         super.onResume()
-        sendMessage!!.setTitle("Order Record")
+        sendMessage!!.setTitle("Order History")
     }
 }

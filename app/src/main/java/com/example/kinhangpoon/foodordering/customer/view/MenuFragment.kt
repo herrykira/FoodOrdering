@@ -24,6 +24,7 @@ class MenuFragment() : Fragment(), MyFoodAdapter.ItemModifier{
     internal var context: Context? = null
     internal var recyclerViewItems: RecyclerView? = null
     internal var adapter: MyFoodAdapter? = null
+    internal var location: String? = null
 
     override fun onItemSelected(position: Int) {
         //Log.i("mylog", "item " + position)
@@ -61,7 +62,7 @@ class MenuFragment() : Fragment(), MyFoodAdapter.ItemModifier{
     }
     override fun onResume() {
         super.onResume()
-        sendMessage!!.setTitle("Menu")
+        sendMessage!!.setTitle("Menu of " + location)
     }
 
     fun setSendMessage(sendMessage: SendMessage) {
@@ -70,5 +71,9 @@ class MenuFragment() : Fragment(), MyFoodAdapter.ItemModifier{
 
     fun setCity(city: String) {
         this.city = city
+    }
+
+    fun setLocation(location: String) {
+        this.location = location
     }
 }

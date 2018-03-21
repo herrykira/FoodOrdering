@@ -37,19 +37,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             is MainscreenFragment ->
                 when (item_index%4) {
                     0 -> {
-                        Toast.makeText(this, "Menu", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this, "Menu", Toast.LENGTH_SHORT).show()
                         addPlacesFragment()
                     }
                     1 -> {
-                        Toast.makeText(this, "Track", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this, "Track", Toast.LENGTH_SHORT).show()
                         addRecordFragment()
                     }
                     2 -> {
-                        Toast.makeText(this, "Ordering History", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this, "Ordering History", Toast.LENGTH_SHORT).show()
                         addRecordFragment()
                     }
                     3 -> {
-                        Toast.makeText(this, "Map", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this, "Map", Toast.LENGTH_SHORT).show()
                         startActivity( Intent(this@MainActivity, GMapsActivity::class.java))
                     }
 
@@ -64,43 +64,43 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     //Toast.makeText(this, "Place #" + item_index, Toast.LENGTH_SHORT).show()
                 when (item_index) {
                     0 -> {
-                        Toast.makeText(this, "High Court of Karnataka", Toast.LENGTH_SHORT).show()
-                        addMenuFragment("banglore")
+                        //Toast.makeText(this, "High Court of Karnataka", Toast.LENGTH_SHORT).show()
+                        addMenuFragment("banglore", "Karnataka")
                         FoodDescription.currentCity = "banglore"
                     }
                     1 -> {
-                        Toast.makeText(this, "Bangalore Palace", Toast.LENGTH_SHORT).show()
-                        addMenuFragment("banglore")
+                        //Toast.makeText(this, "Bangalore Palace", Toast.LENGTH_SHORT).show()
+                        addMenuFragment("banglore", "Bangalore Palace")
                         FoodDescription.currentCity = "banglore"
                     }
                     2 -> {
-                        Toast.makeText(this, "St Francis Xavier", Toast.LENGTH_SHORT).show()
-                        addMenuFragment("banglore")
+                        //Toast.makeText(this, "St Francis Xavier", Toast.LENGTH_SHORT).show()
+                        addMenuFragment("banglore", "St Francis Xavier")
                         FoodDescription.currentCity = "banglore"
                     }
                     3 -> {
-                        Toast.makeText(this, "Vikas Soudha", Toast.LENGTH_SHORT).show()
-                        addMenuFragment("banglore")
+                        //Toast.makeText(this, "Vikas Soudha", Toast.LENGTH_SHORT).show()
+                        addMenuFragment("banglore", "Vikas Soudha")
                         FoodDescription.currentCity = "banglore"
                     }
                     4 -> {
-                        Toast.makeText(this, "Lotus Tempel", Toast.LENGTH_SHORT).show()
-                        addMenuFragment("delhi")
+                        //Toast.makeText(this, "Lotus Tempel", Toast.LENGTH_SHORT).show()
+                        addMenuFragment("delhi", "Lotus")
                         FoodDescription.currentCity = "delhi"
                     }
                     5 -> {
-                        Toast.makeText(this, "Akshardham", Toast.LENGTH_SHORT).show()
-                        addMenuFragment("delhi")
+                        //Toast.makeText(this, "Akshardham", Toast.LENGTH_SHORT).show()
+                        addMenuFragment("delhi", "Akshardham")
                         FoodDescription.currentCity = "delhi"
                     }
                     6 -> {
-                        Toast.makeText(this, "India Gate", Toast.LENGTH_SHORT).show()
-                        addMenuFragment("delhi")
+                        //Toast.makeText(this, "India Gate", Toast.LENGTH_SHORT).show()
+                        addMenuFragment("delhi", "India Gate")
                         FoodDescription.currentCity = "delhi"
                     }
                     7 -> {
-                        Toast.makeText(this, "Tajmahal", Toast.LENGTH_SHORT).show()
-                        addMenuFragment("delhi")
+                        //Toast.makeText(this, "Tajmahal", Toast.LENGTH_SHORT).show()
+                        addMenuFragment("delhi", "Tajmahal")
                         FoodDescription.currentCity = "delhi"
                     }
                 }
@@ -248,9 +248,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 .commit()
     }
 
-    private fun addMenuFragment(city: String) {
+    private fun addMenuFragment(city: String, location: String) {
         val menuFragment: MenuFragment = MenuFragment()
         menuFragment.setSendMessage(this@MainActivity)
+        menuFragment.setLocation(location)
         menuFragment.setCity(city)
         Log.i("maylog", "inflate menu")
         supportFragmentManager
