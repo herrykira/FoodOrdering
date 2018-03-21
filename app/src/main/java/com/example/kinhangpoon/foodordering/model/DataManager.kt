@@ -14,6 +14,8 @@ import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.app.Activity
+import com.example.kinhangpoon.foodordering.main.MainActivity
 
 
 /**
@@ -126,7 +128,9 @@ class DataManager(context: Context): IDataManager {
                 .flatMap { response ->
                     return@flatMap userService!!.confirmUser(FoodDescription.confirmNum!!)
                 }
-                .doOnNext { response -> Log.i("mylog", "final confirm " + response.orderDetail[0].orderId)}
+                .doOnNext { response -> Log.i("mylog", "final confirm " + response.orderDetail[0].orderId)
+                                        FoodDescription.confirmOrderDetail = response.orderDetail[0]
+                }
                 .flatMap { response ->
                     return@flatMap userService!!.recordUser(AccountDescription.UserMobile)
                 }
@@ -138,14 +142,17 @@ class DataManager(context: Context): IDataManager {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         {response ->
-                            Log.i("mylog", "track: orderId " + response.orderDetail[0].orderId)
+                            FoodDescription.trackOrderDetail = response.orderDetail[0]
+                            /*Log.i("mylog", "track: orderId " + response.orderDetail[0].orderId)
                             Log.i("mylog", "track: orderDate " + response.orderDetail[0].orderDate)
                             Log.i("mylog", "track: orderStatus " + response.orderDetail[0].orderStatus)
                             Log.i("mylog", "track: orderTotal " + response.orderDetail[0].totalOrder)
                             Toast.makeText(context, "Order ID: " + response.orderDetail[0].orderId
                                                     + "\nOrder Status: " + response.orderDetail[0].orderStatus
                                                     + "\nMoney Paid: " + response.orderDetail[0].orderStatus
-                                                    + "\nOrder Date: " + response.orderDetail[0].orderDate, Toast.LENGTH_LONG).show()
+                                                    + "\nOrder Date: " + response.orderDetail[0].orderDate, Toast.LENGTH_LONG).show()*/
+                            val activity = context as MainActivity
+                            activity.addReceiptFragment()
                         },
                         {error ->
                             Log.i("mylog", error!!.message)

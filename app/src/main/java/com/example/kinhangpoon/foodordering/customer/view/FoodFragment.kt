@@ -114,7 +114,7 @@ class FoodFragment : Fragment() {
                 foodPresenter = FoodPresenter(context!!)
                 foodPresenter!!.sendOrder(order_category,order_name,(order_quantity).toString(),
                         total_order,order_delivery_add,order_date!!,AccountDescription.UserMobile)
-                editTextNum!!.setText("0",TextView.BufferType.EDITABLE)//reset the num
+
             } else {
                 Log.i("mylog", "didn't order anything")
             }
@@ -137,6 +137,7 @@ class FoodFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
+        editTextNum!!.setText("0",TextView.BufferType.EDITABLE)//reset the num
         sendMessage!!.setTitle("Order Your Food")
     }
 

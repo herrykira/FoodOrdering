@@ -16,4 +16,13 @@
     <string name="order">Order</string>
     <string name="facebook_app_id">151575755537322</string>
     <string name="fb_login_protocol_scheme">fb151575755537322</string>
+    <string name="order_detail">Order Detail</string>
+    <string name="order_status">Order Status:</string>
+    <string name="order_id">Order ID:</string>
+    <string name="order_date">Order Date:</string>
+    <string name="order_name">Order Name:</string>
+    <string name="total_order">Total Order:</string>
+    <string name="order_deliver_address">Order Deliver Address:</string>
+    <string name="order_quantity">Order Quantity:</string>
+    <string name="track_information">Track Information:</string>
 </resources>

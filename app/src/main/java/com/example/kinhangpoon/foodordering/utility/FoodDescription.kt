@@ -13,4 +13,7 @@ object FoodDescription {
     var currentCity: String? = null
     var confirmNum: String? = null
     var address: String? = null
+
+    var confirmOrderDetail: OrderDetailItem? = null
+    var trackOrderDetail: OrderDetailItem? = null
 }

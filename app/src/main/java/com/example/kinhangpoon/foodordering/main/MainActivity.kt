@@ -273,13 +273,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun addRecordFragment() {
         val recordFragment: RecordFragment = RecordFragment()
         recordFragment.setSendMessage(this@MainActivity)
-        Log.i("maylog", "inflate record description")
+        Log.i("mylog", "inflate record description")
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.fragment_container, recordFragment)
                 .addToBackStack(null)
                 .commit()
     }
+
+    public fun addReceiptFragment() {
+        val receiptFragment: ReceiptFragment = ReceiptFragment()
+        receiptFragment.setSendMessage(this@MainActivity)
+        Log.i("mylog", "inflate receipt")
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, receiptFragment)
+                .addToBackStack(null)
+                .commit()
+    }
+
     override fun setTitle(page_title: String) {
         getSupportActionBar()!!.setTitle(page_title)
     }
