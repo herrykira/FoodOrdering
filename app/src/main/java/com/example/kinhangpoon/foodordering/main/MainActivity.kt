@@ -40,7 +40,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         Toast.makeText(this, "Menu", Toast.LENGTH_SHORT).show()
                         addPlacesFragment()
                     }
-                    1 -> Toast.makeText(this, "Track", Toast.LENGTH_SHORT).show()
+                    1 -> {
+                        Toast.makeText(this, "Track", Toast.LENGTH_SHORT).show()
+                        addRecordFragment()
+                    }
                     2 -> {
                         Toast.makeText(this, "Ordering History", Toast.LENGTH_SHORT).show()
                         addRecordFragment()

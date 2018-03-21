@@ -151,6 +151,7 @@ class DataManager(context: Context): IDataManager {
                                                     + "\nOrder Status: " + response.orderDetail[0].orderStatus
                                                     + "\nMoney Paid: " + response.orderDetail[0].orderStatus
                                                     + "\nOrder Date: " + response.orderDetail[0].orderDate, Toast.LENGTH_LONG).show()*/
+                            Toast.makeText(context, "Transaction completed, we'll deliver the food soon", Toast.LENGTH_LONG).show()
                             val activity = context as MainActivity
                             activity.addReceiptFragment()
                         },
